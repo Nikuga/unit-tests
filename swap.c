@@ -44,43 +44,22 @@ List *swap(List *head, List *node_1, List *node_2)
     
     if (num_pre_node_1_and_node_2 != 2)
         return head;
-
-    if (pre_node_1 == NULL) {
-        pre_node_2->next = node_1;
-        tmp_node = node_1->next;
-        node_1->next = node_2->next;
-        node_2->next = tmp_node;
-        return node_2;
-    }
-
-    if (pre_node_2 == NULL) {
+        
+    if(pre_node_1 && pre_node_2) {
         pre_node_1->next = node_2;
-        tmp_node = node_2->next;
-        node_2->next = node_1->next;
-        node_1->next = tmp_node;
-        return node_1;
+        pre_node_2->next = node_1;    
     }
-
-    if (node_2->next == node_1) {
-        pre_node_2->next = node_1;
-        tmp_node = node_1->next;
-        node_1->next = node_2;
-        node_2->next = tmp_node;
-        return head;
-    }
-
-    if (node_1->next == node_2) {
+    else if (pre_node_1) {
         pre_node_1->next = node_2;
-        tmp_node = node_2->next;
-        node_2->next = node_1;
-        node_1->next = tmp_node;
-        return head;
+        head = node_1;
     }
-
-    pre_node_1->next = node_2;
-    tmp_node = node_2->next;
-    node_2->next = node_1->next;
-    pre_node_2->next = node_1;
-    node_1->next = tmp_node;
+    else {
+        pre_node_2->next = node_1;
+        head = node_2;
+    }
+    
+    tmp_node = node_1->next;
+    node_1->next = node_2->next;
+    node_2->next = tmp_node;
     return head;
 }

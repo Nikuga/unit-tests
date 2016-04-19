@@ -12,10 +12,11 @@ echo 'set logging file '$2>>_tmp.gdb
 
 echo ' '>>$2
 exec < $1
-
-while(read var) 
+read var
+#while(read var) 
+while [ $var ]
 do
-	read var
+	#read var
 	list_length=$var
 
 	echo 'create_list (*($head)) '$list_length >> _tmp.gdb
@@ -38,7 +39,7 @@ do
 	echo 'p "old_list"' >> _tmp.gdb
 	echo 'printf_list (*($head))' >> _tmp.gdb
 	echo 'set logging off' >> _tmp.gdb
-	echo 'p bubble_sort($head)' >> _tmp.gdb
+	echo 'p merge_sort($head)' >> _tmp.gdb
 	echo 'set logging on' >> _tmp.gdb
 	echo 'p "new_list"' >> _tmp.gdb
 	echo 'printf_list (*($head))' >> _tmp.gdb
@@ -50,6 +51,6 @@ done
 echo 'q' >> _tmp.gdb
 echo 'y' >> _tmp.gdb
 
-gdb -q -x _tmp.gdb bin-bubble >>/dev/null
+gdb -q -x _tmp.gdb bin-merge >>/dev/null
 
 rm _tmp.gdb
